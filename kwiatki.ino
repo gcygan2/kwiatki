@@ -2,9 +2,9 @@
 #include <WebServer.h>
 #include <EEPROM.h>
 
-#define LED_PIN 5
+#define LED_PIN 2
 #define LED_COUNT 8
-#define GRZYBEK 25
+#define GRZYBEK 15
 
 #define EEPROM_SIZE 512
 #define START_ADDR 0
