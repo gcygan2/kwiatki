@@ -1,10 +1,11 @@
 #include <WiFi.h>
+#include <WiFiMulti.h>
 #include <WebServer.h>
 #include <EEPROM.h>
+#include <HTTPClient.h>
 
-#define LED_PIN 2
-#define LED_COUNT 8
-#define GRZYBEK 15
+#define PRZEK 2
+#define TRYB 3
 
 #define EEPROM_SIZE 512
 #define START_ADDR 0
@@ -12,12 +13,12 @@
 String ssid;
 String password;
 
-int tik = 0;
-volatile int pokaz = 20;
-portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
-
 WebServer server(80);
 bool apMode = false;
+
+WiFiMulti wifiMulti;
+HTTPClient http;
+
 
 // Strona HTML z formularzem
 String formPage() {
@@ -67,18 +68,7 @@ void setupAP() {
   server.on("/save", HTTP_POST, handleSave);
   server.begin();
 }
-  
-void handleInterrupt ()
-{
-  //Serial.println("Przerwanie");
-  portENTER_CRITICAL_ISR(&mux);
-  if (pokaz == 19 || pokaz > 190) {
-    pokaz = 2000;
-  } else {
-    pokaz = 20;
-  }
-  portEXIT_CRITICAL_ISR(&mux);
-}
+
 
 void writeStringToEEPROM(int addr, const String &data) {
   int len = data.length();
@@ -100,13 +90,13 @@ String readStringFromEEPROM(int addr) {
 }
 
 void setup() {
-  pinMode(GRZYBEK, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(GRZYBEK), handleInterrupt, FALLING);
+  pinMode(TRYB, INPUT_PULLUP);
+  pinMode(PRZEK, OUTPUT);
   
   Serial.begin(115200);
   EEPROM.begin(EEPROM_SIZE);
   // Sprawdzenie przycisku podczas startu
-  if (digitalRead(GRZYBEK) == LOW) {
+  if (digitalRead(TRYB) == LOW) {
     apMode = true;
     Serial.println("Start w trybie AP");
     setupAP();
@@ -130,10 +120,39 @@ void setup() {
   }
 }
 
+void getCzas ()
+{
+  static String poprzedni;
+  if ((wifiMulti.run() == WL_CONNECTED)) {
+    http.begin("http://gcygan.webd.pl/kwiatki/?k=1234");
+    if (http.GET() == HTTP_CODE_OK) {
+      String s = http.getString();
+      s.trim(); 
+      if (s.startsWith("\xEF\xBB\xBF")){
+        s = s.substring(3); 
+      }
+      Serial.println (s);
+      if (s == "wlacz" && poprzedni == "reset") {
+        digitalWrite (PRZEK, HIGH);
+        delay (1000);
+        digitalWrite (PRZEK, LOW);
+      } else if (s == "wylacz" && poprzedni == "reset") {
+        digitalWrite (PRZEK, HIGH);
+        delay (5000);
+        digitalWrite (PRZEK, LOW);
+      }
+      poprzedni = s;
+    }
+    http.end();
+  }
+}
+
+
 void loop() {
   if (apMode) {
     server.handleClient();
   } else {
-    delay(500);
+    getCzas ();
+    delay(10000);
   }
 }
