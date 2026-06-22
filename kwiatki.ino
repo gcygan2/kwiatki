@@ -4,8 +4,8 @@
 #include <EEPROM.h>
 #include <HTTPClient.h>
 
-#define PRZEK 2
-#define TRYB 3
+#define PRZEK 4
+#define TRYB 2
 
 #define EEPROM_SIZE 512
 #define START_ADDR 0
@@ -113,10 +113,7 @@ void setup() {
     }
     Serial.println(ssid);
     Serial.println(password);
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(300);
-    }
+    wifiMulti.addAP(ssid.c_str(), password.c_str());
   }
 }
 
