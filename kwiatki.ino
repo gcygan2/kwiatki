@@ -6,6 +6,9 @@
 
 #define PRZEK 4
 #define TRYB 2
+#define IN12V 5
+#define GLEBA 3
+
 const char *serwer = "http://gcygan.webd.pl/zdalny/?k=1234";
 
 #define EEPROM_SIZE 512
