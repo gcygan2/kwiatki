@@ -6,6 +6,7 @@
 
 #define PRZEK 4
 #define TRYB 2
+const char *serwer = "http://gcygan.webd.pl/zdalny/?k=1234";
 
 #define EEPROM_SIZE 512
 #define START_ADDR 0
@@ -19,17 +20,16 @@ bool apMode = false;
 WiFiMulti wifiMulti;
 HTTPClient http;
 
-
 // Strona HTML z formularzem
 String formPage() {
   return String(
-    "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'></head><body><div style='background-color: white;max-width: 400px;margin: auto;'>"
+    "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+    "</head><body><div style='max-width: 400px;margin: auto;'>"
     "<form method='POST' action='/save'>"
     "SSID: <input name='ssid'><br><br>"
     "Klucz: <input name='key'><br><br>"
     "<input type='submit' value='Zapisz'>"
-    "</form>"
-    "</body></html>"
+    "</form></div></body></html>"
   );
 }
 
@@ -90,6 +90,7 @@ String readStringFromEEPROM(int addr) {
 }
 
 void setup() {
+  setCpuFrequencyMhz(80);
   pinMode(TRYB, INPUT_PULLUP);
   pinMode(PRZEK, OUTPUT);
   
@@ -111,8 +112,11 @@ void setup() {
       ssid = stored.substring(0, sep);
       password = stored.substring(sep + 1);
     }
-    Serial.println(ssid);
-    Serial.println(password);
+    //Serial.println(ssid);
+    //Serial.println(password);
+
+    WiFi.mode(WIFI_STA);
+    WiFi.setSleep(true);
     wifiMulti.addAP(ssid.c_str(), password.c_str());
   }
 }
@@ -121,7 +125,7 @@ void getCzas ()
 {
   static String poprzedni;
   if ((wifiMulti.run() == WL_CONNECTED)) {
-    http.begin("http://gcygan.webd.pl/kwiatki/?k=1234");
+    http.begin(serwer);
     if (http.GET() == HTTP_CODE_OK) {
       String s = http.getString();
       s.trim(); 
@@ -129,13 +133,13 @@ void getCzas ()
         s = s.substring(3); 
       }
       Serial.println (s);
-      if (s == "wlacz" && poprzedni == "reset") {
+      if (s == "wlacz") {
         digitalWrite (PRZEK, HIGH);
         delay (1000);
         digitalWrite (PRZEK, LOW);
-      } else if (s == "wylacz" && poprzedni == "reset") {
+      } else if (s == "wylacz") {
         digitalWrite (PRZEK, HIGH);
-        delay (5000);
+        delay (6000);
         digitalWrite (PRZEK, LOW);
       }
       poprzedni = s;
@@ -153,3 +157,43 @@ void loop() {
     delay(10000);
   }
 }
+
+/*
+index.php
+<?php
+if (isset ($_GET['c'])) {
+	file_put_contents('./stan.txt', $_GET['c'], LOCK_EX);
+	$fp = fopen("./dziennik.txt", "at");
+	if ($fp) {
+		flock($fp, LOCK_EX);
+		fwrite($fp, gmdate("Y-m-d\TH:i:s\Z", time()+date("Z"))."\t".$_GET['c'].$tekst.PHP_EOL);
+		flock($fp, LOCK_UN);
+		fclose ($fp);
+	}
+	echo "<meta http-equiv=\"refresh\" content=\"0; url=./panel.html\">\n";
+} else if (isset ($_GET['k']) && $_GET['k'] == "1234") {
+	readfile ("./stan.txt");
+	file_put_contents('./stan.txt', 'reset', LOCK_EX);
+} else {
+?>
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Status</title>
+	</head>
+	<body>
+		<pre>
+<?php 
+echo "Aktualny stan: ".file ("./stan.txt")[0].$tekst.PHP_EOL;
+readfile ("./dziennik.txt");
+?>
+		</pre>
+	</body>
+</html>
+<?php
+}
+?>
+
+*/
