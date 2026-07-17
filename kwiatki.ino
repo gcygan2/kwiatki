@@ -7,7 +7,7 @@
 #define PRZEK 4
 #define TRYB 2
 #define IN12V 5
-#define GLEBA 3
+//#define GLEBA 3
 
 const char *serwer = "http://gcygan.webd.pl/zdalny/?k=1234";
 
@@ -95,6 +95,7 @@ String readStringFromEEPROM(int addr) {
 void setup() {
   setCpuFrequencyMhz(80);
   pinMode(TRYB, INPUT_PULLUP);
+  pinMode(IN12V, INPUT_PULLUP);
   pinMode(PRZEK, OUTPUT);
   
   Serial.begin(115200);
@@ -126,7 +127,7 @@ void setup() {
 
 void getCzas ()
 {
-  static String poprzedni;
+  //static String poprzedni;
   if ((wifiMulti.run() == WL_CONNECTED)) {
     http.begin(serwer);
     if (http.GET() == HTTP_CODE_OK) {
@@ -136,16 +137,16 @@ void getCzas ()
         s = s.substring(3); 
       }
       Serial.println (s);
-      if (s == "wlacz") {
+      if (s == "wlacz" && digitalRead(IN12V) || s == "wylacz" && !digitalRead(IN12V)) {
         digitalWrite (PRZEK, HIGH);
         delay (1000);
         digitalWrite (PRZEK, LOW);
-      } else if (s == "wylacz") {
+      } else if (s == "dlugi") {
         digitalWrite (PRZEK, HIGH);
         delay (6000);
         digitalWrite (PRZEK, LOW);
       }
-      poprzedni = s;
+      //poprzedni = s;
     }
     http.end();
   }
