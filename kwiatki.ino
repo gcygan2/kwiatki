@@ -115,8 +115,6 @@ void setup() {
       ssid = stored.substring(0, sep);
       password = stored.substring(sep + 1);
     }
-    //Serial.println(ssid);
-    //Serial.println(password);
 
     WiFi.mode(WIFI_STA);
     WiFi.setSleep(true);
@@ -135,16 +133,15 @@ void getStatus()
         s = s.substring(3); 
       }
       Serial.println (s);
-      if (s == "wlacz" && digitalRead(IN12V) || s == "wylacz" && !digitalRead(IN12V)) {
+      if (s == "zalacz" && digitalRead(IN12V) || s == "wylacz" && !digitalRead(IN12V)) {
         digitalWrite (PRZEK, HIGH);
         delay (1000);
         digitalWrite (PRZEK, LOW);
-      } else if (s == "dlugi") {
+      } else if (s == "reset") {
         digitalWrite (PRZEK, HIGH);
         delay (6000);
         digitalWrite (PRZEK, LOW);
       }
-      //poprzedni = s;
     }
     http.end();
   }
