@@ -7,9 +7,8 @@
 #define PRZEK 4
 #define TRYB 2
 #define IN12V 5
-//#define GLEBA 3
 
-const char *serwer = "http://gcygan.webd.pl/zdalny/?k=1234";
+const char *serwer = "http://gcygan.webd.pl/kwiatki/?k=1234";
 
 #define EEPROM_SIZE 512
 #define START_ADDR 0
@@ -125,9 +124,8 @@ void setup() {
   }
 }
 
-void getCzas ()
+void getStatus()
 {
-  //static String poprzedni;
   if ((wifiMulti.run() == WL_CONNECTED)) {
     http.begin(serwer);
     if (http.GET() == HTTP_CODE_OK) {
@@ -157,7 +155,7 @@ void loop() {
   if (apMode) {
     server.handleClient();
   } else {
-    getCzas ();
+    getStatus();
     delay(10000);
   }
 }
