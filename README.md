@@ -30,5 +30,5 @@
 5.  Akcja „**Zresetuj**" powoduje zwarcie styków *POW SW* na czas *6 s*,
     niezależnie od wejścia *12V*.
 
-![](Pictures/100000000000049E0000049E81A7E9C9A7F19C16.jpg){width="9.999cm"
+![](100000000000049E0000049E81A7E9C9A7F19C16.jpg){width="9.999cm"
 height="9.999cm"}
