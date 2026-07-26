@@ -137,7 +137,7 @@ void getStatus()
         digitalWrite (PRZEK, HIGH);
         delay (1000);
         digitalWrite (PRZEK, LOW);
-      } else if (s == "reset") {
+      } else if (s == "reset" && !digitalRead(IN12V)) {
         digitalWrite (PRZEK, HIGH);
         delay (6000);
         digitalWrite (PRZEK, LOW);
