@@ -10,8 +10,9 @@
 3.  W pasku adresu przeglądarki internetowej wpisz adres 192.168.31.1
     i wypełnij formularz, wpisując dane sieci, z którą będzie się łączył
     przekaźnik.
+    
 ![](zrzut.png)
-4.  Odłącz i ponownie podłączając przewód zasilający.
+5.  Odłącz i ponownie podłączając przewód zasilający.
 
 ## Obsługa zdalnego przekaźnika
 
