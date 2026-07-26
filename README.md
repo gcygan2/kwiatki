@@ -12,6 +12,7 @@
     przekaźnik.
     
 ![](zrzut.png)
+
 5.  Odłącz i ponownie podłączając przewód zasilający.
 
 ## Obsługa zdalnego przekaźnika
