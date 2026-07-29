@@ -13,23 +13,6 @@ if (isset ($_GET['c'])) {
 	readfile ("./stan.txt");
 	file_put_contents('./stan.txt', 'brak', LOCK_EX);
 } else {
-?>
-<!DOCTYPE html>
-<html lang="pl">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Status</title>
-	</head>
-	<body>
-		<pre>
-<?php 
-echo "Realizowana akcja: ".file ("./stan.txt")[0].$tekst.PHP_EOL."Dziennik:".$tekst.PHP_EOL;
-readfile ("./dziennik.txt");
-?>
-		</pre>
-	</body>
-</html>
-<?php
+	readfile ("./stan.txt");
 }
 ?>

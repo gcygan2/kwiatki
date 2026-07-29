@@ -4,9 +4,10 @@
 3. Po wybraniu „Załącz”, jeśli na wejściu 12 V nie występuje napięcie, styki POW SW są zwierane na 1 s.  
 4. Po wybraniu „Wyłącz”, jeśli na wejściu 12 V występuje napięcie, styki POW SW są zwierane na 1 s.  
 5. Po wybraniu „Zresetuj”, jeśli na wejściu 12 V występuje napięcie, styki POW SW są zwierane na 6 s.  
-![](100000000000049E0000049E81A7E9C9A7F19C16.jpg)
+![](zdjecie.jpg)
 ## Konfigurowanie dostępu do sieci (WiFi)
 1. Naciśnij i przytrzymaj czarny przycisk na spodzie obudowy. Następnie podłącz zasilanie i zwolnij przycisk.  
 2. Połącz się z siecią Wi-Fi o nazwie „KWIATKI”. Klucz do sieci: „12345678”.  
 3. W pasku adresu przeglądarki internetowej wpisz adres 192.168.31.1. Następnie wypełnij formularz, podając dane sieci Wi-Fi, z którą ma połączyć się przekaźnik.  
 4. Odłącz i ponownie podłącz zasilanie.  
+![](zrzut.png)  
