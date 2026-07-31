@@ -28,8 +28,8 @@ String formPage() {
     "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'>"
     "</head><body><div style='max-width: 400px;margin: auto;'>"
     "<form method='POST' action='/save'>"
-    "SSID: <input name='ssid'><br><br>"
-    "Klucz: <input name='key'><br><br>"
+    "Nazwa sieci WiFi: <input name='ssid'><br><br>"
+    "Haslo: <input name='key'><br><br>"
     "<input type='submit' value='Zapisz'>"
     "</form></div></body></html>"
   );
