@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^instrukcja instrukcja\.php [L]
+RewriteRule ^dziennik dziennik\.txt [L]
+RewriteRule ^panel panel\.html [L]
+RewriteRule ^ardu\.ino$ kwiatki/ [L]
