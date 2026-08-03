@@ -1,6 +1,6 @@
 # Instrukcja obsługi zdalnego przekaźnika
 
-1. W przeglądarce otwórz <http://gcygan.webd.pl/kwiatki/panel.html>
+1. W przeglądarce otwórz <http://gcygan.webd.pl/kwiatki/panel>
 2. Wybierz akcję i kliknij **Wykonaj**. Akcja zostanie zrealizowana w czasie nie dłuższym niż 10 s, 
    o ile zdalny przekaźnik jest połączony z siecią oraz spełnione są warunki określone w poniższych punktach.
 3. Po wybraniu `Załącz`, jeśli na wejściu 12 V nie występuje napięcie, styki POW SW są zwierane na 1 s.
