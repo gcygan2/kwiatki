@@ -7,7 +7,7 @@
 4. Po wybraniu `Wyłącz`, jeśli na wejściu 12 V występuje napięcie, styki POW SW są zwierane na 1 s.
 5. Po wybraniu `Zresetuj`, jeśli na wejściu 12 V występuje napięcie, styki POW SW są zwierane na 6 s.
 
-<img src="zdjecie.jpg" style="max-width:100%; height:auto;" alt="Zdalny przekaźnik">
+![Zdalny przekaźnik](zdjecie.jpg)
 
 ## Konfiguracja sieci WiFi
 
