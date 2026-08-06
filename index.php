@@ -8,7 +8,7 @@ if (isset ($_GET['c'])) {
 		flock($fp, LOCK_UN);
 		fclose ($fp);
 	}
-	echo "<meta http-equiv=\"refresh\" content=\"0; url=./panel.html\">\n";
+	echo "<meta http-equiv=\"refresh\" content=\"0; url=./panel\">\n";
 } else if (isset ($_GET['k']) && $_GET['k'] == "1234") {
 	readfile ("./stan.txt");
 	file_put_contents('./stan.txt', 'brak', LOCK_EX);
