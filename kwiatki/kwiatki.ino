@@ -6,7 +6,7 @@
 
 #define PRZEK 4
 #define TRYB 2
-#define IN12V 5
+//#define IN12V 5
 
 const char *serwer = "http://gcygan.webd.pl/kwiatki/?k=2121";
 
@@ -94,9 +94,10 @@ String readStringFromEEPROM(int addr) {
 void setup() {
   setCpuFrequencyMhz(80);
   pinMode(TRYB, INPUT_PULLUP);
+#ifdef IN12V
   pinMode(IN12V, INPUT_PULLUP);
+#endif  
   pinMode(PRZEK, OUTPUT);
-  
   Serial.begin(115200);
   EEPROM.begin(EEPROM_SIZE);
   // Sprawdzenie przycisku podczas startu
@@ -133,13 +134,19 @@ void getStatus()
         s = s.substring(3); 
       }
       Serial.println (s);
-      //if (s == "zalacz" && digitalRead(IN12V) || s == "wylacz" && !digitalRead(IN12V)) {
-      if (s == "zalacz") {
+#ifdef IN12V
+      if (s == "zalacz" && digitalRead(IN12V) || s == "wylacz" && !digitalRead(IN12V)) {
+#else
+      if (s == "zalacz" || s == "wylacz") {
+#endif
         digitalWrite (PRZEK, HIGH);
         delay (1000);
         digitalWrite (PRZEK, LOW);
-      //} else if (s == "reset" && !digitalRead(IN12V)) {
+#ifdef IN12V        
+      } else if (s == "reset" && !digitalRead(IN12V)) {
+#else
       } else if (s == "reset") {
+#endif
         digitalWrite (PRZEK, HIGH);
         delay (6000);
         digitalWrite (PRZEK, LOW);
