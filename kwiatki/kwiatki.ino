@@ -8,7 +8,7 @@
 #define TRYB 2
 #define IN12V 5
 
-const char *serwer = "http://gcygan.webd.pl/kwiatki/?k=1234";
+const char *serwer = "http://gcygan.webd.pl/kwiatki/?k=2121";
 
 #define EEPROM_SIZE 512
 #define START_ADDR 0
@@ -133,11 +133,13 @@ void getStatus()
         s = s.substring(3); 
       }
       Serial.println (s);
-      if (s == "zalacz" && digitalRead(IN12V) || s == "wylacz" && !digitalRead(IN12V)) {
+      //if (s == "zalacz" && digitalRead(IN12V) || s == "wylacz" && !digitalRead(IN12V)) {
+      if (s == "zalacz") {
         digitalWrite (PRZEK, HIGH);
         delay (1000);
         digitalWrite (PRZEK, LOW);
-      } else if (s == "reset" && !digitalRead(IN12V)) {
+      //} else if (s == "reset" && !digitalRead(IN12V)) {
+      } else if (s == "reset") {
         digitalWrite (PRZEK, HIGH);
         delay (6000);
         digitalWrite (PRZEK, LOW);
