@@ -2,26 +2,28 @@
 <html lang="pl">
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="styl.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script defer src="gen.js"></script>
 		<title>Panel sterowania</title>
 	</head>
 	<body>
-		<div style='background:#ddd;max-width:400px;margin:auto;padding:20px;'>
+		<div class="container">
 			<form action="index.php" method="get">
-				<p><label for="c">Akcja:</label>
+				<label for="d">Nazwa urządzenia</label>
+				<input type="text" name="d" id="stan" placeholder="Wpisz nazwę">
+				<label for="c">Akcja</label>
 				<select name="c">
 					<option value="test">--wybierz--</option>
 					<option value="zalacz">Załącz</option>
 					<option value="wylacz">Wyłącz</option>
 					<option value="reset">Zresetuj</option>
 				</select>
-				<input type="submit" value="Wykonaj"></p>
+				<input type="submit" value="Wykonaj">
 			</form>
-			<p>Realizowana akcja: <span id="dane"></span></p>
-			<p><a href="instrukcja.php" target="_blank">Instrukcja</a> |
-			<a href="dziennik.txt" target="_blank">Dziennik</a> |
-			<a href="Kwiatki.apk" download>Aplikacja</a></p>
+			<div>Realizowana akcja: <span id="dane"></span></div>
+			<div><a href="instrukcja.php" target="_blank">Instrukcja</a> |
+			<a href="dziennik.csv" target="_blank">Dziennik</a></div>
 		</div>
 	</body>
 </html>
