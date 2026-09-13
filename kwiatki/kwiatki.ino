@@ -6,9 +6,9 @@
 
 #define PRZEK 4
 #define TRYB 2
-//#define IN12V 5
+#define IN12V 5
 
-const char *serwer = "http://gcygan.webd.pl/kwiatki/?k=2121";
+const char *serwer = "http://gcygan.webd.pl/kwiatki/?k=nazwa";
 
 #define EEPROM_SIZE 512
 #define START_ADDR 0
@@ -22,7 +22,6 @@ bool apMode = false;
 WiFiMulti wifiMulti;
 HTTPClient http;
 
-// Strona HTML z formularzem
 String formPage() {
   return String(
     "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'>"
