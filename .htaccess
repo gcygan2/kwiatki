@@ -1,7 +1,7 @@
 RewriteEngine On
 RewriteRule ^panel panel\.html [L]
 RewriteRule ^instrukcja instrukcja\.php [L]
-RewriteRule ^dziennik dziennik\.txt [L]
+RewriteRule ^dziennik dziennik\.csv [L]
 <FilesMatch "\.apk$">
     ForceType application/vnd.android.package-archive
     Header set Content-Disposition "attachment"
